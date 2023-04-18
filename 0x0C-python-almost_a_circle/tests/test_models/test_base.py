@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!usr/bin/python3
 
 """Unittest classes:
     TestBase_instantiation - line 23
@@ -16,6 +16,7 @@ import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
+
 
 class TestBase_instantiation(unittest.TestCase):
     """Unittests for testing instantiation of the Base class."""
