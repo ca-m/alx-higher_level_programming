@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-nqueens backtracking program to print the coordinates of n queens
-on an nxn grid such that they are all in non-attacking positions
+backtracking program to print coordinates of n queens
+on an nxn grid so they are all in non-attacking positions
 """
 
 
