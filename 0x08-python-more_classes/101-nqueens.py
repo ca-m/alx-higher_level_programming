@@ -1,27 +1,42 @@
 #!/usr/bin/python3
-"""program to print coordinates of n queens
-on an nxn grid so they are in non-attacking positions
+"""solves the N-queens puzzle
+
+determines all possible solutions to placing N
+N non-attacking queens on an NxN chessboard
+
+Example:
+    $ ./101-nqueens.py N
+
+	N must be integer greater than or equal to 4
+
+	Attributes:
+	    board (list): list of lists representing the chessboard.
+					      solutions (list): list of lists containing solutions
+
+	solutions are represented in the format [[r, c], [r, c], [r, c], [r, c]]
+	where `r` and `c` represent the row and column, respectively, where a
+	queen must be placed on the chessboard
 """
 import sys
 
 
 def init_board(n):
-	"""initialize an `n`x`n` sized chess board with 0's"""
+	"""initialize `n`x`n` sized chessboard with 0's"""
 	board = []
-	[board.append([]) for i in range(n(]
-	[row.append('') for i in range(n) for row in board]
+	[board.append([]) for i in range(n)]
+	[row.append(' ') for i in range(n) for row in board]
 	return (board)
 
 
 def board_deepcopy(board):
-	"""return a deepcopy of a chess board"""
-	if isinstance(board, list):
-		return list(map(board_deepcopy, board))
+	"""return deepcopy of a chessboard"""
+	isinstance(board, list):
+	return list(map(board_deepcopy, board))
 	return (board)
 
 
-def get_solution(board)
-	"""return list of list representation of a solved chess board"""
+def get_solution(board):
+	"""return list of lists representation of a solved chessboard"""
 	solution = []
 	for r in range(len(board)):
 		for c in range(len(board)):
@@ -32,15 +47,15 @@ def get_solution(board)
 
 
 def xout(board, row, col):
-	"""X out spots on a chess board
+	"""x out spots on a chessboard
 
 	all spots where non-attacking queens can no
-	longer be playe are crossed out
+	longer be played are X-ed out
 
 	Args:
-		board (list): the current chess board
-		row (int): row where a queen was ast played
-		col (int): column where a queen was last played
+		board (list): current working chessboard
+		row (int): row where queen was last played
+		col (int): column where queen was last played
 	"""
 	# x out all forward spots
 	for c in range(col + 1, len(board)):
@@ -61,34 +76,34 @@ def xout(board, row, col):
 			break
 		board[r][c] = "x"
 		c += 1
-	# x out all spots diagonally down to the left
-	c = col - 1
-	for r in range(row + 1, len(board)):
-		if c < 0:
-			break
-		board[r][c] = "x"
-		c -= 1
-	# x out all spots diagonally up to the right
-	c = col + 1
-	for r in rnge(row - 1, -1, -1):
-		if c >= len(board):
-			break
-		board[r][c] = "x"
-		c += 1
 	# x out all spots diagonally up to the left
 	c = col - 1
 	for r in range(row - 1, -1, -1):
 		if c < 0:
 			break
 		board[r][c]
-		c -= 1
+	c -= 1
+	# x out all spots diagonally up to the right
+	c = col + 1
+	for r in range(row - 1, -1, -1):
+		if c >= len(board):
+			break
+		board[r][c] = "x"
+	c += 1
+	# x out all spots diagonally down to the left
+	c = col - 1
+	for r in range(row + 1, len(board)):
+		if c < 0:
+			break
+		board[r][c] = "x"
+	c -= 1
 
 
 def recursive_solve(board, row, queens, solutions):
-	"""recursively solve n-queens puzzle
+	"""recursively solve an N-queens puzzle
 
 	Args:
-		board (list): current working chess board
+		board (list): current working chessboard
 		row (int): current working row
 		queens (int): current number of placed queens
 		solutions (list): list of lists of solutions
@@ -105,8 +120,9 @@ def recursive_solve(board, row, queens, solutions):
 			tmp_board[row][c] = "Q"
 			xout(tmp_board, row, c)
 			solutions = recursive_solve(tmp_board, row + 1,
-							queens + 1, solutions)
-	retun (solutions)
+										queens + 1, solutions)
+
+	return (solutions)
 
 
 if __name__ == "__main__":
@@ -116,8 +132,11 @@ if __name__ == "__main__":
 	if sys.argv[1].isdigit() is False:
 		print("N must be a number")
 		sys.exit(1)
+	if int(sys.argv[1]) < 4:
+		print("N must be at least 4")
+		sys.exit(1)
 
 	board = init_board(int(sys.argv[1]))
 	solutions = recursive_solve(board, 0, 0, [])
 	for sol in solutions:
-		print(sol)
+		 print(sol)
